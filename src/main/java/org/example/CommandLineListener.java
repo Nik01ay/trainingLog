@@ -4,7 +4,11 @@ import java.util.Scanner;
 
 public class CommandLineListener {
 
-    private   CommandHandler commandHandler = new CommandHandler(); // todo заменить на иньекции
+    private   CommandHandler commandHandler ;
+
+    public CommandLineListener(CommandHandler commandHandler) {
+        this.commandHandler = commandHandler;
+    }
 
     void run() {
         String input = "START";
