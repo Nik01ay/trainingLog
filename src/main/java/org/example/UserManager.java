@@ -22,9 +22,16 @@ public class UserManager {
         userRepo.addUser(newUser);
     }
 
-    public boolean identificationUser(String userName, String password) {
+    public String identificationUser(String userName, String password) {
         UserEntity user = userRepo.getUserByName(userName);
-        return userRepo.authentication(user, password);
+        if (userRepo.authentication(user, password)){
+            CacheData.setCurrentSessionUserName(user.getName());
+            System.out.println("Авторизация успешна"); //todo Логгер
+            return  CacheData.getCurrentSessionUserName();
+        }       return "Неверное имя или пароль";
     }
 
+   public void logout(){
+        CacheData.resetSession();
+   }
 }

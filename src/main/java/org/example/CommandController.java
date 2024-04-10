@@ -14,9 +14,11 @@ public class CommandController {
 
     }
 
-    public void method2(String a, String b) {
-        System.out.println("Вызван метод 2");
-        System.out.println("a " + a);
-        System.out.println("b " + b);
+    public void login(String name, String password) {
+      String userName =  userManager.identificationUser(name, password);
+        System.out.println("активный пользователь = " + userName);
+    }
+    public void logout() {
+        userManager.logout();
     }
 }
