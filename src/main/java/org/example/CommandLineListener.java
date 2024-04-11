@@ -18,7 +18,7 @@ public class CommandLineListener {
                     "enter the command and arguments separated by a space: ");
             input = scanner.nextLine();
             String[] parts = input.split(" ");
-            if (input != null) {
+            if ((input != null) && (!input.equals("EXIT"))) {
 
                 try {
                     String command = parts[0];

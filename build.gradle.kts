@@ -17,6 +17,7 @@ dependencies {
 
     testCompileOnly ("org.projectlombok:lombok:1.18.32")
     testAnnotationProcessor ("org.projectlombok:lombok:1.18.32")
+    testImplementation ("org.mockito:mockito-core:3.12.4")
 }
 
 tasks.test {
