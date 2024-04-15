@@ -4,8 +4,6 @@ package org.example;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.entity.UserRole;
-import org.example.inMemoryRepo.UserInMemoryRepo;
-
 public class CacheData {
     @Getter
     @Setter
@@ -13,6 +11,9 @@ public class CacheData {
     @Getter
     @Setter
     private static UserRole userRole;
+    @Getter
+    @Setter
+    private static String step;
 
 
 

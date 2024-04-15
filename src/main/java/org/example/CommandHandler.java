@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 
 public class CommandHandler {
 
-private CommandController commandController;
+private final CommandController commandController;
 
     public CommandHandler(CommandController commandController) {
         this.commandController = commandController;
@@ -28,7 +28,7 @@ private CommandController commandController;
                 method.invoke(commandController, (Object[]) args);
             }
         } catch (Exception e) {
-            System.out.println("Ошибка при выполнении метода: " + e.getMessage());
+            System.out.println("Error while executing method: " + e.getMessage());
         }
     }
 }

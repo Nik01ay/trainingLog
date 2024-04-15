@@ -1,15 +1,18 @@
 package org.example.manager;
 
 import org.example.CacheData;
+import org.example.Security;
 import org.example.entity.UserEntity;
 import org.example.entity.UserRole;
 import org.example.inMemoryRepo.UserInMemoryRepo;
 
 public class UserManager {
     private UserInMemoryRepo userRepo;
+    private Security security;
 
     public UserManager(UserInMemoryRepo userRepo) {
         this.userRepo = userRepo;
+        this.security = new Security(userRepo);
     }
 
     public void addNewUser(String userName, String password, String userStringRole) {
@@ -23,14 +26,8 @@ public class UserManager {
         System.out.println("Пользователь добавлен!");
     }
 
-    public String identificationUser(String userName, String password) {
-        UserEntity user = userRepo.getUserByName(userName);
-        if (userRepo.authentication(user, password)){
-            CacheData.setCurrentSessionUserName(user.getName());
-            System.out.println("Авторизация успешна активный пользователь, "
-                    + CacheData.getCurrentSessionUserName()); //todo Логгер
-            return  CacheData.getCurrentSessionUserName();
-        }       return "Неверное имя или пароль";
+    public void identificationUser(String userName, String password) {
+        security.authentification(userName, password);
     }
 
    public void logout(){

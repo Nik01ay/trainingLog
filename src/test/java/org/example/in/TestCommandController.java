@@ -1,7 +1,9 @@
 package org.example.in;
+import org.example.CacheData;
 import org.example.manager.TrainingManager;
 import org.example.manager.UserManager;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -26,14 +28,15 @@ class TestCommandController {
     }
 
     @Test
+    @DisplayName("Test call command add new User")
     void testAddNewUser() {
         commandController.addNewUser("Alice", "password123", "ADMIN");
         verify(userManager, times(1)).addNewUser("Alice", "password123", "ADMIN");
     }
 
     @Test
+    @DisplayName("Test call command login user")
     void testLogin() {
-        Mockito.when(userManager.identificationUser("Alice", "password123")).thenReturn("Alice");
         commandController.login("Alice", "password123");
         verify(userManager, times(1)).identificationUser("Alice", "password123");
     }

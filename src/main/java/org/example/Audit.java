@@ -9,9 +9,11 @@ public class Audit {
             String callingClassName = stackTraceElements[2].getClassName();
             String callingMethodName = stackTraceElements[2].getMethodName();
 
-            System.out.println("Пользователем: " + CacheData.getCurrentSessionUserName() + " Был вызван метод " + callingMethodName + " класса " + callingClassName );
+            System.out.println("User: " //+ CacheData.getCurrentSessionUserName()
+                    + " called the " + callingMethodName
+                    + " method of the " + callingClassName + " class" );
         } else {
-            System.out.println("Невозможно определить вызывающий метод.");
+            System.out.println("Cannot determine calling method.");
         }
     }
 

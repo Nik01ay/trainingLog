@@ -26,11 +26,11 @@ public class CommandLineListener {
                     System.arraycopy(parts, 1, args, 0, args.length);
                     commandHandler.executeMethod(command, args);
                 } catch (Exception e) {
-                    System.out.printf("Ошибка");
+                    System.out.println("Error " + e.getMessage());
                 }
             }
 
         }
-        System.out.printf("THE END");
+        System.out.println("THE END");
     }
 }

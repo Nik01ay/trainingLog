@@ -18,9 +18,7 @@ public class TrainingEntity {
     private String pk;
 
 
-    public void setPk(){
-        this.pk = trainingDay +"'"+ userName + "'" + trainingType;
-    } // todo костыль
+
 
 
 }

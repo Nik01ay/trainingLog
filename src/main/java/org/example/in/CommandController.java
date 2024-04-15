@@ -22,7 +22,7 @@ public class CommandController {
 
     public void login(String name, String password) {
         Audit.listen();
-      String userName =  userManager.identificationUser(name, password);
+      userManager.identificationUser(name, password);
     }
     public void logout() {
         Audit.listen();
@@ -54,7 +54,7 @@ public class CommandController {
 
     public void dellTraining(String trainingType, Integer day){
         Audit.listen();
-        trainingManager.dellete(trainingType, day);
+        trainingManager.delete(trainingType, day);
     }
 
     public void edit(String trainingType, Integer day, Integer... parameters){

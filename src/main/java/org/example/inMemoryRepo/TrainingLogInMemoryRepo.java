@@ -32,8 +32,8 @@ public class TrainingLogInMemoryRepo {
         return (List<TrainingEntity>) trainingEntityHashMap.values();
    }
 
-   public void delete(String trainingType,Integer day){
-        trainingEntityHashMap.remove(day +"'"+ CacheData.getCurrentSessionUserName() +"'"+ trainingType); //todo костыль
+   public void delete(String pk){
+        trainingEntityHashMap.remove(pk);
    }
 
 

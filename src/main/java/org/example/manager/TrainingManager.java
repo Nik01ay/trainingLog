@@ -55,10 +55,12 @@ public class TrainingManager {
             trainingEntity.setTrainingType(trainingTypeInMemoryRepo.getByName(trainingType));
             trainingEntity.setUserName(CacheData.getCurrentSessionUserName());
             trainingEntity.setArrayTrainingParameterValueList(parametersValue);
-            trainingEntity.setPk();
+            trainingEntity.setPk(day +"'"+ CacheData.getCurrentSessionUserName() + "'" + trainingType);
             trainingLogInMemoryRepo.add(trainingEntity);
         }
     }
+
+
 
     public Set<TrainingEntity> getAllAndSortedByDay(){
         Set<TrainingEntity> trainingEntitySet = new TreeSet<>(Comparator.comparingInt(TrainingEntity::getTrainingDay));
@@ -66,18 +68,22 @@ public class TrainingManager {
         return trainingEntitySet;
     }
 
-    public void dellete(String trainingType, Integer day){
-        trainingLogInMemoryRepo.delete(trainingType, day);
+    public void delete(String trainingType, Integer day){
+
+        trainingLogInMemoryRepo.delete(generatedPk(day,trainingType));
     }
 
     public void edit(String trainingType,Integer day, Integer... parametrs){
-        trainingLogInMemoryRepo.getByPk(day +"'"+ CacheData.getCurrentSessionUserName() +"'"+ trainingType)
+        trainingLogInMemoryRepo.getByPk(generatedPk(day, trainingType))
                 .setArrayTrainingParameterValueList(parametrs);
     }
 
     public void statistic(){
         Statistic.out(getAllAndSortedByDay());
 
+    }
+    private String generatedPk(Integer day, String trainingType){
+        return day + "'"+ CacheData.getCurrentSessionUserName() +"'"+ trainingType;
     }
 
 }
