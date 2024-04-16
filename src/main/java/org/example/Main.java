@@ -1,17 +1,38 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import org.example.assistant.ConsoleAssistant;
+import org.example.assistant.ConsoleAssistantHandler;
+import org.example.in.CommandController;
+import org.example.inMemoryRepo.TrainingLogInMemoryRepo;
+import org.example.inMemoryRepo.TrainingParameterInMemoryRepo;
+import org.example.inMemoryRepo.TrainingTypeInMemoryRepo;
+import org.example.inMemoryRepo.UserInMemoryRepo;
+import org.example.manager.TrainingManager;
+import org.example.manager.UserManager;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        UserInMemoryRepo userInMemoryRepo = new UserInMemoryRepo();
+        Security security = new Security(userInMemoryRepo);
+        UserManager userManager = new UserManager(userInMemoryRepo, security);
+
+        TrainingLogInMemoryRepo trainingLogInMemoryRepo = new TrainingLogInMemoryRepo();
+        TrainingParameterInMemoryRepo trainingParameterInMemoryRepo = new TrainingParameterInMemoryRepo();
+        TrainingTypeInMemoryRepo trainingTypeInMemoryRepo = new TrainingTypeInMemoryRepo();
+        TrainingManager trainingManager = new TrainingManager(trainingLogInMemoryRepo,
+                trainingParameterInMemoryRepo, trainingTypeInMemoryRepo, security);
+
+        ConsoleAssistantHandler consoleAssistantHandler = new ConsoleAssistantHandler(security);
+
+        CommandController commandController = new CommandController(userManager, trainingManager);
+        CommandHandler commandHandler = new CommandHandler(commandController);
+
+        CommandLineListener commandLineListener = new CommandLineListener(commandHandler, consoleAssistantHandler);
+
+
+        commandLineListener.run();
+
+
     }
 }
