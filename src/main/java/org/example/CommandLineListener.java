@@ -1,21 +1,27 @@
 package org.example;
 
+import org.example.assistant.ConsoleAssistantHandler;
+
 import java.util.Scanner;
 
 public class CommandLineListener {
 
-    private   CommandHandler commandHandler ;
+    private final   CommandHandler commandHandler ;
 
-    public CommandLineListener(CommandHandler commandHandler) {
+    private final ConsoleAssistantHandler consoleAssistantHandler;
+
+    public CommandLineListener(CommandHandler commandHandler, ConsoleAssistantHandler consoleAssistantHandler) {
         this.commandHandler = commandHandler;
+        this.consoleAssistantHandler = consoleAssistantHandler;
     }
 
     void run() {
         String input = "START";
         while (!input.equals("EXIT")) {
             Scanner scanner = new Scanner(System.in);
-            System.out.print("\n" +
-                    "enter the command and arguments separated by a space: ");
+
+            consoleAssistantHandler.callAssistant();
+
             input = scanner.nextLine();
             String[] parts = input.split(" ");
             if ((input != null) && (!input.equals("EXIT"))) {

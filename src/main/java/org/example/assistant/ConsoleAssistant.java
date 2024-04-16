@@ -1,9 +1,9 @@
-package org.example;
+package org.example.assistant;
 
 public class ConsoleAssistant {
-    public void start() {
-        System.out.println("add a new account write the command:\n" +
-                "addNewUser Name Password");
+    public void addNewUser() {
+        System.out.println("add a new account write the command (ADMIN or USER):\n" +
+                "addNewUser Name Password ADMIN");
 
     }
 
@@ -23,21 +23,21 @@ public class ConsoleAssistant {
                 " showAllTraining");
     }
 
-    public void addParameter(String name, String units) {
+    public void addParameter() {
         System.out.println(
                 "To create a training parameter, enter the command \"addParametr\" " +
-                        "parameter name and units of measurement: " +
-                        "addParametr name units");
+                        "parameter name and units of measurement: \n" +
+                        "addParameter name units");
     }
 
-    public void addTrainingType(String name, String... parametersName) {
+    public void addTrainingType() {
         System.out.println("to create a training type, enter the command \"addTrainingType\"\n" +
                 "name of the training type and list of parameters:\n" +
                 " addTrainingType name parametersName1 parametersName2...");
         System.out.println("recorded parameters: ");
     }
 
-    public void addTraining(Integer day, String trainingType, Integer... parametersValue) {
+    public void addTraining() {
         System.out.println(
                 "to add a workout, enter the command \"addTraining\" day, type of workout, list the parameter values: " +
                 "addTraining 1 typeName 2 4");
@@ -49,14 +49,14 @@ public class ConsoleAssistant {
                 "to view all workouts sorted by day, enter: \"getAllAndSortedByDay\"");
     }
 
-    public void dellTraining(String trainingType, Integer day) {
+    public void dellTraining() {
         System.out.println("To delete a training, enter the command \"dellTraining\" and the training type and day. \n" +
                 "For example: \n" +
                 "dellTraining trainingType1 2");
         System.out.println("recorded workouts in log: ");
     }
 
-    public void edit(String trainingType, Integer day, Integer... parameters) {
+    public void edit() {
         System.out.println("To edit  training, enter the command \"edit\" and the training type and day and parameters. \n" +
                 "For example: \n" +
                 "edit trainingType1 2 3 5");

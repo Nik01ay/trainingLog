@@ -31,4 +31,7 @@ public class TrainingParameterInMemoryRepo {
         return result;
 
     }
+    public Integer size(){
+        return trainingParameterEntityHashMap.size();
+    }
 }

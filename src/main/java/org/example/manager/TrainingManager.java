@@ -1,6 +1,7 @@
 package org.example.manager;
 
 import org.example.CacheData;
+import org.example.Security;
 import org.example.Statistic;
 import org.example.entity.TrainingEntity;
 import org.example.entity.TrainingParameterEntity;
@@ -18,13 +19,17 @@ public class TrainingManager {
     private final TrainingParameterInMemoryRepo trainingParameterInMemoryRepo;
     private final TrainingTypeInMemoryRepo trainingTypeInMemoryRepo;
 
+    private final Security security;
+
     public TrainingManager(TrainingLogInMemoryRepo trainingLogInMemoryRepo,
                            TrainingParameterInMemoryRepo trainingParameterInMemoryRepo,
-                           TrainingTypeInMemoryRepo trainingTypeInMemoryRepo
+                           TrainingTypeInMemoryRepo trainingTypeInMemoryRepo,
+                           Security security
     ) {
         this.trainingLogInMemoryRepo = trainingLogInMemoryRepo;
         this.trainingParameterInMemoryRepo = trainingParameterInMemoryRepo;
         this.trainingTypeInMemoryRepo = trainingTypeInMemoryRepo;
+        this.security = security;
     }
 
     public List<TrainingEntity> getAllAvailable() {
@@ -36,6 +41,8 @@ public class TrainingManager {
 
     public void addParameter(String name, String units){
         trainingParameterInMemoryRepo.add(new TrainingParameterEntity(name, units));
+        CacheData.setCountTrainingParameter(trainingParameterInMemoryRepo.size());
+        security.refreshAcsessMethod();
     }
 
     public void addTrainingType(String name, String...parametersName){
@@ -45,6 +52,8 @@ public class TrainingManager {
                 trainingParameterInMemoryRepo.getByNames(parametersName)
         );
         trainingTypeInMemoryRepo.add(trainingType);
+        CacheData.setCountTrainingType(trainingTypeInMemoryRepo.size());
+        security.refreshAcsessMethod();
 
     }
 
@@ -57,6 +66,8 @@ public class TrainingManager {
             trainingEntity.setArrayTrainingParameterValueList(parametersValue);
             trainingEntity.setPk(day +"'"+ CacheData.getCurrentSessionUserName() + "'" + trainingType);
             trainingLogInMemoryRepo.add(trainingEntity);
+            CacheData.setCountTraining(trainingLogInMemoryRepo.getAllTraining().size());
+            security.refreshAcsessMethod();
         }
     }
 
@@ -69,8 +80,10 @@ public class TrainingManager {
     }
 
     public void delete(String trainingType, Integer day){
-
         trainingLogInMemoryRepo.delete(generatedPk(day,trainingType));
+        CacheData.setCountTraining(getAllAvailable().size());
+        security.refreshAcsessMethod();
+
     }
 
     public void edit(String trainingType,Integer day, Integer... parametrs){

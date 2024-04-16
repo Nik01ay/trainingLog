@@ -17,4 +17,7 @@ public class TrainingTypeInMemoryRepo {
     public TrainingTypeEntity getByName(String name){
         return Optional.ofNullable(trainingTypeEntityHashMap.get(name)).orElseThrow();
     }
+    public Integer size(){
+        return trainingTypeEntityHashMap.size();
+    }
 }

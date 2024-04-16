@@ -24,8 +24,13 @@ private final CommandController commandController;
                 method = commandController.getClass().getMethod(methodName);
                 method.invoke(commandController);
             } else {
+               try {
                 method = commandController.getClass().getMethod(methodName, parameterTypes);
                 method.invoke(commandController, (Object[]) args);
+                } catch (Exception e){
+                   method = commandController.getClass().getMethod(methodName, String[].class);
+                   method.invoke(commandController, (Object) args);
+               }
             }
         } catch (Exception e) {
             System.out.println("Error while executing method: " + e.getMessage());

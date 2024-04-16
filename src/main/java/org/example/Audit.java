@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Аудит
+ */
 public class Audit {
     public static void listen (){
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();

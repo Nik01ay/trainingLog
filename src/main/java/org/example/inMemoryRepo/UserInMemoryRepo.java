@@ -22,6 +22,9 @@ public class UserInMemoryRepo {
                 .getPassword()
                 .equals(password);
     }
+    public Integer size(){
+        return  userEntityHashMap.size();
+    }
 
 
 }
